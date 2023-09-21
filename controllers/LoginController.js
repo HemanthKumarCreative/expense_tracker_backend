@@ -20,6 +20,8 @@ const login = async (req, res) => {
     }
 
     // User authenticated successfully
+    await user.update({ isSignedIn: true });
+
     res.status(200).json({ message: "Login successful", user });
   } catch (error) {
     console.error(error);

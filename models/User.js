@@ -20,6 +20,8 @@ const User = sequelize.define("users", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  isPremiumUser: false,
+  isSignedIn: false,
 });
 
 module.exports = User;
