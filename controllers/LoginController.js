@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const login = async (req, res) => {
   const { email, password } = req.body;
@@ -22,7 +23,15 @@ const login = async (req, res) => {
     // User authenticated successfully
     await user.update({ isSignedIn: true });
 
-    res.status(200).json({ message: "Login successful", user });
+    // Create a JWT token
+    const token = jwt.sign({ userId: user.id }, "apple", {
+      expiresIn: "1h",
+    });
+
+    // Set the token as a cookie
+    res.cookie("token", token, { httpOnly: true });
+
+    res.status(200).json({ message: "Login successful", user, token });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
