@@ -4,16 +4,16 @@ const User = require("./User");
 
 const Order = sequelize.define("orders", {
   id: {
-    type: DataTypes.UUID,
+    type: DataTypes.STRING,
     primaryKey: true,
     allowNull: false,
   },
   user_id: {
-    type: DataTypes.UUID,
+    type: DataTypes.STRING,
     allowNull: false,
   },
   payment_id: {
-    type: DataTypes.UUID,
+    type: DataTypes.STRING,
     allowNull: false,
   },
   status: {
@@ -25,4 +25,4 @@ const Order = sequelize.define("orders", {
 Order.belongsTo(User, { foreignKey: "user_id" });
 User.hasMany(Order, { foreignKey: "user_id" });
 
-module.exports = Expense;
+module.exports = Order;

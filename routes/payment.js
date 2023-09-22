@@ -18,7 +18,7 @@ router.post("/", async (req, res) => {
     // Create the order using Razorpay
     instance.orders.create(options, function (err, order) {
       if (err) {
-        console.error(err);
+        console.error({ error: err });
         return res.status(500).json({ message: "Error creating order" });
       }
       console.log({ order });

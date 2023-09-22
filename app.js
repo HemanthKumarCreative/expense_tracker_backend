@@ -7,7 +7,7 @@ const expensesRouter = require("./routes/expenses");
 const signupRouter = require("./routes/signup");
 const loginRouter = require("./routes/login");
 const paymentRouter = require("./routes/payment");
-
+const ordersRouter = require("./routes/orders");
 const app = express();
 app.use(cors());
 
@@ -20,6 +20,7 @@ app.use("/api/expenses", expensesRouter);
 app.use("/api/signup", signupRouter);
 app.use("/api/login", loginRouter);
 app.use("/api/payment", paymentRouter);
+app.use("/api/orders", ordersRouter);
 
 // Start server
 const PORT = process.env.PORT || 5000;
