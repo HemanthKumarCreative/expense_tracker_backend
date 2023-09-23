@@ -22,6 +22,9 @@ const User = sequelize.define("users", {
   },
   isPremiumUser: false,
   isSignedIn: false,
+  total_expenses: {
+    type: DataTypes.BIGINT,
+  },
 });
 
 module.exports = User;

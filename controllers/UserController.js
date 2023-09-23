@@ -11,7 +11,11 @@ const createUser = async (req, res) => {
 
 const getAllUsers = async (req, res) => {
   try {
-    const users = await User.findAll();
+    const users = await User.findAll({
+      order: [["total_expenses", "DESC"]],
+      limit: 6,
+    });
+
     res.status(200).json(users);
   } catch (error) {
     res.status(500).json({ message: error.message });
