@@ -14,6 +14,7 @@ const getAllUsers = async (req, res) => {
     const users = await User.findAll({
       order: [["total_expenses", "DESC"]],
       limit: 6,
+      attributes: ["id", "name", "total_expenses"],
     });
 
     res.status(200).json(users);
