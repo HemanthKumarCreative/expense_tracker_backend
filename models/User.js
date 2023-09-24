@@ -25,6 +25,10 @@ const User = sequelize.define("users", {
   total_expenses: {
     type: DataTypes.BIGINT,
   },
+  resetToken: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
 });
 
 module.exports = User;
