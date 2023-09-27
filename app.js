@@ -9,6 +9,8 @@ const loginRouter = require("./routes/login");
 const paymentRouter = require("./routes/payment");
 const ordersRouter = require("./routes/orders");
 const passwordRouter = require("./routes/password");
+const downloadRouter = require("./routes/downloads");
+const reportsRouter = require("./routes/reports");
 
 const app = express();
 app.use(cors());
@@ -23,6 +25,8 @@ app.use("/api/signup", signupRouter);
 app.use("/api/login", loginRouter);
 app.use("/api/payment", paymentRouter);
 app.use("/api/orders", ordersRouter);
+app.use("/api/downloads", downloadRouter);
+app.use("/api/reports", reportsRouter);
 app.use("/api/", passwordRouter);
 
 // Start server
