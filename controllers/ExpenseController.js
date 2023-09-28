@@ -19,12 +19,22 @@ const createExpense = async (req, res) => {
 
 const getAllExpenses = async (req, res) => {
   const { user_id } = req.params; // Extract user_id from params
+  const page = req.query.page || 1; // Get the requested page from query params
+  const pageSize = 3; // Set the page size to 3 records per page
 
   try {
-    const expenses = await Expense.findAll({
+    const offset = (page - 1) * pageSize; // Calculate the offset based on the requested page
+    const expenses = await Expense.findAndCountAll({
       where: { user_id }, // Filter expenses by user_id
+      limit: pageSize,
+      offset: offset,
     });
-    res.status(200).json(expenses);
+    const totalPages = Math.ceil(expenses.count / pageSize); // Calculate total pages
+    res.status(200).json({
+      expenses: expenses.rows,
+      currentPage: page,
+      totalPages: totalPages,
+    });
   } catch (error) {
     res.status(500).json({ message: "Internal Server Error" });
   }
