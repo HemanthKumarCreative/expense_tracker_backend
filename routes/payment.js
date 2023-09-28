@@ -5,8 +5,8 @@ const Razorpay = require("razorpay");
 router.post("/", async (req, res) => {
   try {
     const instance = new Razorpay({
-      key_id: "rzp_test_PPWdPOnQ2XuMkp", // Your Razorpay Key ID
-      key_secret: "fWD1Veag74rChnn7YKUUwPDM", // Your Razorpay Key Secret
+      RZP_KEY_ID: process.env.RZP_KEY_ID, // Your Razorpay Key ID
+      RZP_KEY_SECRET: process.env.RZP_KEY_SECRET, // Your Razorpay Key Secret
     });
 
     const options = {

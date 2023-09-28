@@ -1,8 +1,14 @@
 const { Sequelize } = require("sequelize");
+require("dotenv").config();
 
-const sequelize = new Sequelize("expense_app", "hemanth", "Byjus@12", {
-  host: "localhost",
-  dialect: "postgres",
-});
+const sequelize = new Sequelize(
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASS,
+  {
+    host: process.env.DB_IP,
+    dialect: "postgres",
+  }
+);
 
 module.exports = sequelize;

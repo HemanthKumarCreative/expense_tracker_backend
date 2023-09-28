@@ -4,8 +4,8 @@ const Excel = require("exceljs");
 require("dotenv").config();
 
 let s3 = new AWS.S3({
-  accessKeyId: process.env.IAM_USER_KEY,
-  secretAccessKey: process.env.IAM_USER_SECRET,
+  accessKeyId: process.env.AWS_IAM_USER_KEY,
+  secretAccessKey: process.env.AWS_IAM_USER_SECRET,
 });
 
 const saveToWorkBook = (jsonData, workbook, worksheet) => {
