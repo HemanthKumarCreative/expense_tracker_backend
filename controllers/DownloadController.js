@@ -1,6 +1,7 @@
 const { Download } = require("../models/Download");
 
 const createDownloadRecord = async (req, res) => {
+  console.log({ drecord: req.body });
   try {
     const download = await Download.create(req.body);
 
@@ -17,7 +18,6 @@ const getAllDownloadsRecord = async (req, res) => {
     const downloads = await Download.findAll({
       where: { user_id }, // Filter expenses by user_id
     });
-    console.log({ downloads });
     res.status(200).json(downloads);
   } catch (error) {
     res.status(500).json({ message: "Internal Server Error" });

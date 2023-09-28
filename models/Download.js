@@ -11,6 +11,7 @@ const Download = sequelize.define("downloads", {
   user_id: {
     type: DataTypes.UUID,
     allowNull: false,
+    foreignKey: true,
   },
   file_link: {
     type: DataTypes.STRING,
