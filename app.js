@@ -43,9 +43,10 @@ app.use("/api/", passwordRouter);
 
 // Start server
 const PORT = process.env.PORT || 5000;
-const server = https.createServer({ privateKey, certificate }, app);
+const IP = process.env.IP;
+// const server = https.createServer({ privateKey, certificate }, app);
 
-server.listen(PORT, async () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+app.listen(PORT, async () => {
+  console.log(`Server running on http://${IP}:${PORT}`);
   await sequelize.sync(); // Sync the models with the database
 });
