@@ -43,7 +43,7 @@ app.use("/api/", passwordRouter);
 
 // Start server
 const PORT = process.env.PORT || 5000;
-const IP = process.env.IP;
+const IP = process.env.DB_IP;
 // const server = https.createServer({ privateKey, certificate }, app);
 
 app.listen(PORT, async () => {
