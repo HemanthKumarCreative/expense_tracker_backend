@@ -7,7 +7,7 @@ const sequelize = new Sequelize(
   process.env.DB_PASS,
   {
     host: process.env.DB_IP,
-    dialect: "mysql",
+    dialect: "postgres",
   }
 );
 
