@@ -1,12 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const Razorpay = require("razorpay");
+require("dotenv").config();
+console.log(process.env);
 
 router.post("/", async (req, res) => {
   try {
     const instance = new Razorpay({
-      RZP_KEY_ID: process.env.RZP_KEY_ID, // Your Razorpay Key ID
-      RZP_KEY_SECRET: process.env.RZP_KEY_SECRET, // Your Razorpay Key Secret
+      key_id: process.env.RZP_KEY_ID, // Your Razorpay Key ID
+      key_secret: process.env.RZP_KEY_SECRET, // Your Razorpay Key Secret
     });
 
     const options = {

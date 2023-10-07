@@ -3,6 +3,7 @@ const { tranEmailApi } = require("../utils/mailTransporter"); // Import the tran
 const { generateRandomToken } = require("../utils/tokenGenerate");
 const router = express.Router();
 const User = require("../models/User"); // Assuming you have a User model
+const Password = require("../models/Password");
 const bcrypt = require("bcrypt");
 
 router.post("/forgot-password", async (req, res) => {
@@ -15,10 +16,11 @@ router.post("/forgot-password", async (req, res) => {
   const receivers = [{ email: email }];
   try {
     const user = await User.findOne({ where: { email } });
-
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
+    await Password.create({ user_id: user.id, resetToken });
+
     await user.update({ resetToken });
 
     // Send a password reset email
