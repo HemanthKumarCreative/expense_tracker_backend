@@ -3,8 +3,9 @@ const router = express.Router();
 const Razorpay = require("razorpay");
 require("dotenv").config();
 console.log(process.env);
+const { checkAuthorization } = require("../controllers/AuthController");
 
-router.post("/", async (req, res) => {
+router.post("/", checkAuthorization, async (req, res) => {
   try {
     const instance = new Razorpay({
       key_id: process.env.RZP_KEY_ID, // Your Razorpay Key ID

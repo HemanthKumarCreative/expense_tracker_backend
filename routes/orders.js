@@ -3,8 +3,9 @@ const express = require("express");
 const router = express.Router();
 const Order = require("../models/Order"); // Assuming you have imported the Order model
 const User = require("../models/User");
+const { checkAuthorization } = require("../controllers/AuthController");
 
-router.post("/", async (req, res) => {
+router.post("/", checkAuthorization, async (req, res) => {
   const { id, user_id, payment_id, status } = req.body;
   const user = await User.findByPk(user_id);
 
