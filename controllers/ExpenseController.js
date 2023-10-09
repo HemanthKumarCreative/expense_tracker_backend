@@ -5,7 +5,7 @@ const createExpense = async (req, res) => {
   try {
     const expense = await Expense.create(req.body);
 
-    const user = await User.findByPk(req.body.user_id); // Assuming you have the user's ID
+    const user = await User.findByPk(req.body.user_id);
     const updatedTotalExpenses =
       parseInt(user.total_expenses) + parseInt(req.body.amount);
 
@@ -18,18 +18,18 @@ const createExpense = async (req, res) => {
 };
 
 const getAllExpenses = async (req, res) => {
-  const { user_id } = req.params; // Extract user_id from params
-  const page = req.query.page || 1; // Get the requested page from query params
-  const pageSize = 3; // Set the page size to 3 records per page
+  const { user_id } = req.params;
+  const page = req.query.page || 1;
+  const pageSize = 3;
 
   try {
-    const offset = (page - 1) * pageSize; // Calculate the offset based on the requested page
+    const offset = (page - 1) * pageSize;
     const expenses = await Expense.findAndCountAll({
-      where: { user_id }, // Filter expenses by user_id
+      where: { user_id },
       limit: pageSize,
       offset: offset,
     });
-    const totalPages = Math.ceil(expenses.count / pageSize); // Calculate total pages
+    const totalPages = Math.ceil(expenses.count / pageSize);
     res.status(200).json({
       expenses: expenses.rows,
       currentPage: page,
@@ -50,7 +50,7 @@ const deleteExpense = async (req, res) => {
       return res.status(404).json({ message: "Expense not found" });
     }
 
-    const user = await User.findByPk(expense.user_id); // Assuming you have the user's ID
+    const user = await User.findByPk(expense.user_id);
     const updatedTotalExpenses =
       parseInt(user.total_expenses) - parseInt(expense.amount);
 

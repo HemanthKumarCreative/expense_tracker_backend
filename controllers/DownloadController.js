@@ -12,11 +12,11 @@ const createDownloadRecord = async (req, res) => {
 };
 
 const getAllDownloadsRecord = async (req, res) => {
-  const { user_id } = req.params; // Extract user_id from params
+  const { user_id } = req.params;
   console.log({ user_id });
   try {
     const downloads = await Download.findAll({
-      where: { user_id }, // Filter expenses by user_id
+      where: { user_id },
     });
     res.status(200).json(downloads);
   } catch (error) {

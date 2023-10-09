@@ -1,5 +1,4 @@
 const express = require("express");
-const https = require("https");
 const fs = require("fs");
 const path = require("path");
 const cors = require("cors");
@@ -20,17 +19,14 @@ const accessLogStream = fs.createWriteStream(
   path.join(__dirname, "access.log"),
   { flags: "a" }
 );
-const privateKey = fs.readFileSync("server.key");
-const certificate = fs.readFileSync("server.cert");
+
 const app = express();
 app.use(cors());
 app.use(morgan("combined", { stream: accessLogStream }));
-// Set up middleware
 app.use(express.json());
 app.use(helmet());
 app.use(compression());
 
-// Set up routes
 app.use("/api/users", usersRouter);
 app.use("/api/expenses", expensesRouter);
 app.use("/api/signup", signupRouter);
@@ -44,7 +40,6 @@ app.use("/api/", passwordRouter);
 // Start server
 const PORT = process.env.PORT || 5000;
 const IP = process.env.DB_IP;
-// const server = https.createServer({ privateKey, certificate }, app);
 
 app.listen(PORT, async () => {
   console.log(`Server running on http://${IP}:${PORT}`);

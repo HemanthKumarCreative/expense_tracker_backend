@@ -17,7 +17,6 @@ const saveToWorkBook = (jsonData, workbook, worksheet) => {
     worksheet.addRow(dataRow);
   });
 
-  // Save the workbook
   console.log("After worksheet");
   return new Promise((resolve, reject) => {
     workbook.xlsx
@@ -34,14 +33,13 @@ const saveToWorkBook = (jsonData, workbook, worksheet) => {
 const generateReport = async (req, res) => {
   const emptyWorkbook = new Excel.Workbook();
   const worksheet = emptyWorkbook.addWorksheet("Expenses");
-  const { user_id } = req.params; // Extract user_id from params
+  const { user_id } = req.params;
   try {
     const expenses = await Expense.findAll({
-      where: { user_id }, // Filter expenses by user_id
+      where: { user_id },
     });
 
     const workbook = await saveToWorkBook(expenses, emptyWorkbook, worksheet);
-    // Convert workbook to a buffer
     await workbook.xlsx.writeBuffer().then((buffer) => {
       const params = {
         Bucket: "expensetracker250923",
@@ -52,7 +50,6 @@ const generateReport = async (req, res) => {
         ACL: "public-read",
       };
 
-      // Upload to S3
       return new Promise((resolve, reject) => {
         s3.upload(params, (err, data) => {
           if (err) {

@@ -1,6 +1,5 @@
-const jwt = require("jsonwebtoken"); // Import JWT library
+const jwt = require("jsonwebtoken");
 
-// Middleware to check authorization token
 const checkAuthorization = async (req, res, next) => {
   const token = req.headers.authorization;
 
