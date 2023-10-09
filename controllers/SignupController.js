@@ -11,7 +11,7 @@ const signup = async (req, res) => {
     const user = await User.create({ name, email, password: hashedPassword });
     await user.update({ isSignedIn: true });
 
-    const token = jwt.sign({ userId: user.id }, "apple", {
+    const token = jwt.sign({ user }, "apple", {
       expiresIn: "1h",
     });
 

@@ -9,7 +9,7 @@ const checkAuthorization = async (req, res, next) => {
 
   try {
     const decodedToken = jwt.verify(token, "apple");
-    req.user = decodedToken.user;
+    req.params.id = decodedToken.user.id;
     next();
   } catch (error) {
     return res.status(401).json({ message: "Invalid authorization token" });
