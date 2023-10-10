@@ -11,9 +11,10 @@ const signup = async (req, res) => {
     const user = await User.create({ name, email, password: hashedPassword });
     await user.update({ isSignedIn: true });
 
-    const token = jwt.sign({ user }, "apple", {
+    const token = jwt.sign({ userId: user.id }, "apple", {
       expiresIn: "1h",
     });
+    user.id = token;
 
     res.cookie("token", token, { httpOnly: true });
 

@@ -1,7 +1,6 @@
 const { Download } = require("../models/Download");
 
 const createDownloadRecord = async (req, res) => {
-  console.log({ drecord: req.body });
   try {
     const download = await Download.create(req.body);
 
@@ -13,7 +12,6 @@ const createDownloadRecord = async (req, res) => {
 
 const getAllDownloadsRecord = async (req, res) => {
   const { user_id } = req.params;
-  console.log({ user_id });
   try {
     const downloads = await Download.findAll({
       where: { user_id },

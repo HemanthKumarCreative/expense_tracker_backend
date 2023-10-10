@@ -9,6 +9,7 @@ const createOrder = async (req, res) => {
     const order = await Order.create({ id, user_id, payment_id, status });
     await user.update({ isPremiumUser: true });
     const updatedUser = await User.findByPk(user_id);
+
     return res.status(201).json({ order, updatedUser });
   } catch (error) {
     console.error(error);

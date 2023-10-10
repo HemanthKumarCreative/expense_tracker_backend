@@ -17,7 +17,6 @@ const saveToWorkBook = (jsonData, workbook, worksheet) => {
     worksheet.addRow(dataRow);
   });
 
-  console.log("After worksheet");
   return new Promise((resolve, reject) => {
     workbook.xlsx
       .writeFile("report.xlsx")

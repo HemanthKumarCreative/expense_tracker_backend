@@ -11,7 +11,6 @@ const forgotPassword = async (req, res) => {
   const sender = {
     email: "avisihk@gmail.com",
   };
-  console.log({ resetToken });
   const receivers = [{ email: email }];
   try {
     const user = await User.findOne({ where: { email } });
@@ -42,7 +41,6 @@ const forgotPassword = async (req, res) => {
 
 const resetPassword = async (req, res) => {
   const { email, newPassword } = req.body;
-  console.log(req.body);
   try {
     const user = await User.findOne({ where: { email } });
 

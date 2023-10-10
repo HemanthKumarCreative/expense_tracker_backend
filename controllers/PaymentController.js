@@ -19,7 +19,6 @@ const collectPayment = async (req, res) => {
         console.error({ error: err });
         return res.status(500).json({ message: "Error creating order" });
       }
-      console.log({ order });
 
       res.status(200).json({ order });
     });

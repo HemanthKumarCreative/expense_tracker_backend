@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 
 const login = async (req, res) => {
   const { email, password } = req.body;
-  console.log({ email });
   try {
     const user = await User.findOne({ where: { email } });
 
@@ -20,10 +19,10 @@ const login = async (req, res) => {
 
     await user.update({ isSignedIn: true });
 
-    const token = jwt.sign({ user }, "apple", {
+    const token = jwt.sign({ userId: user.id }, "apple", {
       expiresIn: "1h",
     });
-
+    user.id = token;
     res.cookie("token", token, { httpOnly: true });
 
     res.status(200).json({ message: "Login successful", user, token });
