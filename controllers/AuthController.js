@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 const checkAuthorization = async (req, res, next) => {
   const token = req.headers.authorization;
@@ -7,7 +8,7 @@ const checkAuthorization = async (req, res, next) => {
   }
 
   try {
-    const decodedToken = jwt.verify(token, "apple");
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
     req.params.user_id = decodedToken.userId;
     next();
   } catch (error) {

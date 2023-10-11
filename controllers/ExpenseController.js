@@ -29,6 +29,7 @@ const getAllExpenses = async (req, res) => {
       limit: pageSize,
       offset: offset,
     });
+
     const totalPages = Math.ceil(expenses.count / pageSize);
     res.status(200).json({
       expenses: expenses.rows,
